@@ -1,0 +1,19 @@
+h1 {
+    text-align: center;
+}
+.controls {
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    & > button {
+        margin: 5px;
+    }
+}
+.shop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
