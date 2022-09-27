@@ -6,7 +6,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
 }
 .controls > button {
   margin: 5px;

@@ -12,21 +12,30 @@ const atTheOldToad = {
         const createItem = potions.map((potion) => {
             const listItem = document.createElement("li");
             listItem.classList.add("item");
-            listItem.innerHTML = `Nazwa: ${potion.name} Cena: ${potion.price}`;
+            listItem.innerHTML = `Nazwa: "${potion.name}" Cena: ${potion.price}`;
             return listItem;
         });
         listShop.append(...createItem);
     },
 
-    addPotion(newPotion) {
+    addPotion(addNameInputData) {
         //Dodaje miksture do tablicy jesli nie ma, jesli jest zwraca komunikat
+        const addNameInput = document.getElementById("addname-input");
+        addNameInput.addEventListener("input", (event) => {
+            const addNameInputData = event.currentTarget.value;
+        });
         for (const item of potions) {
-            if (item.name === newPotion.name) {
-                return alert (`Błąd! Eliksir ${newPotion.name} jest już w Twoim inwentarzu!`);
+            if (item.name === addNameInputData) {
+                return alert(
+                    `Błąd! Eliksir ${addNameInputData} jest już w Twoim inwentarzu!`
+                );
             }
         }
-        potions.push(newPotion);
-            return alert (`Eliksir ${newPotion.name} został dodany do Twojego inwentarza!`)
+        potions.push(addNameInputData);
+        // potions.price.push(newPrice);
+        return alert(
+            `Eliksir ${addNameInputData} został dodany do Twojego inwentarza!`
+        );
     },
     removePotion(potionName) {
         //usuwa miksture jesli jest w tablicy, jesli nie zwraca komunikat
@@ -56,31 +65,41 @@ const atTheOldToad = {
 // atTheOldToad.removePotion("Dragon breath")
 // atTheOldToad.getPotions()
 
+const addNameInput = document.getElementById("addname-input");
+        addNameInput.addEventListener("input", (event) => {
+            const addNameInputData = event.currentTarget.value;
+        });
+
 const control = document.querySelector(".controls");
-// const btnGet = document.getElementById("getpotions");
-// const btnAdd = document.getElementById("addpotions");
-// const btnRemove = document.getElementById("removepotions");
-// const btnUpdate = document.getElementById("updatepotions");
 
-control.addEventListener("click", selectButton);
+const btnGet = document.getElementById("getpotions");
+const btnAdd = document.getElementById("addpotions");
+const btnRemove = document.getElementById("removepotions");
+const btnUpdate = document.getElementById("updatepotions");
 
-function selectButton(event) {
-    if (event.target.nodeName !== "BUTTON") {
-        return;
-    }
-    const selectedBtn = event.target.id;   
-    console.log(selectedBtn) 
-     if (selectedBtn === "getpotions"){
-        atTheOldToad.getPotions()
-        return;
-     }
-     if (selectedBtn === "addpotions"){
-        atTheOldToad.addPotion({ name: "Invisibility", price: 620 })
-        return;
-     }
-     if (selectedBtn === "removepotions"){
-        atTheOldToad.removePotion("Dragon breath")
-        return;
-     }
+btnGet.addEventListener("click", atTheOldToad.getPotions);
+btnAdd.addEventListener("click", atTheOldToad.addPotion);
+btnRemove.addEventListener("click", atTheOldToad.removePotion);
+btnUpdate.addEventListener("click", atTheOldToad.updatePotionName);
 
-}
+// control.addEventListener("click", selectButton);
+// function selectButton(event) {
+//     if (event.target.nodeName !== "BUTTON") {
+//         return;
+//     }
+//     const selectedBtn = event.target.id;
+//     console.log(selectedBtn)
+//      if (selectedBtn === "getpotions"){
+//         atTheOldToad.getPotions()
+//         return;
+//      }
+//      if (selectedBtn === "addpotions"){
+//         atTheOldToad.addPotion({ name: "Invisibility", price: 620 })
+//         return;
+//      }
+//      if (selectedBtn === "removepotions"){
+//         atTheOldToad.removePotion("Dragon breath")
+//         return;
+//      }
+
+// }
