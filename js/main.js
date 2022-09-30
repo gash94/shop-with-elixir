@@ -6,6 +6,7 @@ const potions = [
 ];
 const atTheOldToad = {
     getPotions() {
+        console.log(potions)
         //Pokazuje wszytskie mikstury
         const listShop = document.querySelector(".shop");
         listShop.innerHTML = "";
@@ -19,11 +20,11 @@ const atTheOldToad = {
     },
 
     addPotion(addNameInputData) {
+        
+        
+        console.log(addNameInputData)
         //Dodaje miksture do tablicy jesli nie ma, jesli jest zwraca komunikat
-        const addNameInput = document.getElementById("addname-input");
-        addNameInput.addEventListener("input", (event) => {
-            const addNameInputData = event.currentTarget.value;
-        });
+        
         for (const item of potions) {
             if (item.name === addNameInputData) {
                 return alert(
@@ -31,7 +32,7 @@ const atTheOldToad = {
                 );
             }
         }
-        potions.push(addNameInputData);
+        potions.push({name:addNameInputData});
         // potions.price.push(newPrice);
         return alert(
             `Eliksir ${addNameInputData} został dodany do Twojego inwentarza!`
@@ -65,10 +66,11 @@ const atTheOldToad = {
 // atTheOldToad.removePotion("Dragon breath")
 // atTheOldToad.getPotions()
 
-const addNameInput = document.getElementById("addname-input");
-        addNameInput.addEventListener("input", (event) => {
-            const addNameInputData = event.currentTarget.value;
-        });
+// const addNameInput = document.getElementById("addname-input");
+// addNameInput.addEventListener("input", (event) => {
+//     let addNameInputData = event.currentTarget.value;
+// });    
+        
 
 const control = document.querySelector(".controls");
 
@@ -78,7 +80,10 @@ const btnRemove = document.getElementById("removepotions");
 const btnUpdate = document.getElementById("updatepotions");
 
 btnGet.addEventListener("click", atTheOldToad.getPotions);
-btnAdd.addEventListener("click", atTheOldToad.addPotion);
+btnAdd.addEventListener("click", () => {
+    const addNameInput = document.getElementById("addname-input");
+    atTheOldToad.addPotion(addNameInput.value);
+  });
 btnRemove.addEventListener("click", atTheOldToad.removePotion);
 btnUpdate.addEventListener("click", atTheOldToad.updatePotionName);
 
