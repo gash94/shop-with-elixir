@@ -1,11 +1,15 @@
 // tablica z obiektami wszytskich mikstur (nazwa,cena)
-let potions = [
-    { name: "Speed potion", price: 460 },
-    { name: "Dragon breath", price: 780 },
-    { name: "Stone skin", price: 520 },
-];
-potions = JSON.parse(localStorage.getItem('list-potions'));
 
+
+
+let potions = JSON.parse(window.localStorage.getItem('list-potions'));
+if (potions === null) {
+    potions = [
+        { name: "Speed potion", price: 460 },
+        { name: "Dragon breath", price: 780 },
+        { name: "Stone skin", price: 520 },
+    ];
+}
 const atTheOldToad = {
     
     getPotions() {
@@ -83,9 +87,12 @@ btnGet.addEventListener("click", atTheOldToad.getPotions);
 btnAdd.addEventListener("click", () => {
     const addNameIn = document.getElementById("addname-input");
     const addPriceIn = document.getElementById("addprice-input");
+    
+    console.log(addPriceIn.value)
     if (addNameIn.value === "" || addPriceIn.value === "") {
         return alert("Błąd! Uzupełnij wszytskie pola!");
     }
+
     atTheOldToad.addPotion(addNameIn.value, addPriceIn.value);
 
     addNameIn.value = "";
