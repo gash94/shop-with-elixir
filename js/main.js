@@ -4,38 +4,44 @@ const potions = [
     { name: "Dragon breath", price: 780 },
     { name: "Stone skin", price: 520 },
 ];
+
+
 const atTheOldToad = {
     getPotions() {
-        console.log(potions)
         //Pokazuje wszytskie mikstury
-        const listShop = document.querySelector(".shop");
+        const listShop = document.querySelector(".shop")
         listShop.innerHTML = "";
         const createItem = potions.map((potion) => {
             const listItem = document.createElement("li");
             listItem.classList.add("item");
             listItem.innerHTML = `Nazwa: "${potion.name}" Cena: ${potion.price}`;
+            
             return listItem;
+            
         });
         listShop.append(...createItem);
+        // const savedListPotions = localStorage.setItem('list-potions', JSON.stringify(potions))
+        // const parsedListPotions = JSON.parse(localStorage.getItem('list-potions'));
+        // console.log(parsedListPotions)
+        // listShop.insertAdjacentHTML("beforeend", parsedListPotions);
+        
+        
     },
 
-    addPotion(addNameInputData) {
-        
-        
-        console.log(addNameInputData)
+    addPotion(addNameInData, addPriceInData) {
         //Dodaje miksture do tablicy jesli nie ma, jesli jest zwraca komunikat
-        
+
         for (const item of potions) {
-            if (item.name === addNameInputData) {
+            if (item.name === addNameInData) {
                 return alert(
-                    `Błąd! Eliksir ${addNameInputData} jest już w Twoim inwentarzu!`
+                    `Błąd! Eliksir ${addNameInData} jest już w Twoim inwentarzu!`
                 );
             }
         }
-        potions.push({name:addNameInputData});
-        // potions.price.push(newPrice);
+        potions.push({ name: addNameInData, price: addPriceInData });
+
         return alert(
-            `Eliksir ${addNameInputData} został dodany do Twojego inwentarza!`
+            `Eliksir "${addNameInData}" z ceną: ${addPriceInData} został dodany do Twojego inwentarza!`
         );
     },
     removePotion(potionName) {
@@ -43,10 +49,20 @@ const atTheOldToad = {
         const potionIndex = potions.findIndex(
             (object) => object.name === potionName
         );
+        // for (const item of potions) {
+        //     if (item.name !== potionName) {
+        //         return alert(
+        //             `Błąd! Eliksir ${potionName} nie ma w Twoim inwentarzu!`
+        //         );
+        //     }
+        // }
         if (potionIndex === -1) {
-            return `Potion ${potionName.name} is not in inventory!`;
+            return alert(`Eliksiru "${potionName}" nie ma w Twoim inwentarzu!`);
         } else {
             potions.splice(potionIndex, 1);
+            return alert(
+                `Eliksir "${potionName}" został usunięty z Twojego inwentarza!`
+            );
         }
     },
     updatePotionName(oldName, newName) {
@@ -54,23 +70,18 @@ const atTheOldToad = {
         const potionIndex = potions.findIndex(
             (object) => object.name === oldName
         );
+
         if (potionIndex === -1) {
-            return `Potion ${oldName} is not in inventory!`;
+            return alert(`Eliksiru "${oldName}" nie ma w Twoim inwentarzu!`);
         }
         potions[potionIndex].name = newName;
-        return `Potion ${oldName} has been change name to ${newName}`;
+        return alert(`Eliksir "${oldName}" zmienił nazwę na "${newName}"`);
     },
 };
 // atTheOldToad.addPotion({ name: "Invisibility", price: 620 })
 // atTheOldToad.updatePotionName("Stone skin", "Invulnerability potion")
 // atTheOldToad.removePotion("Dragon breath")
 // atTheOldToad.getPotions()
-
-// const addNameInput = document.getElementById("addname-input");
-// addNameInput.addEventListener("input", (event) => {
-//     let addNameInputData = event.currentTarget.value;
-// });    
-        
 
 const control = document.querySelector(".controls");
 
@@ -80,31 +91,35 @@ const btnRemove = document.getElementById("removepotions");
 const btnUpdate = document.getElementById("updatepotions");
 
 btnGet.addEventListener("click", atTheOldToad.getPotions);
+
 btnAdd.addEventListener("click", () => {
-    const addNameInput = document.getElementById("addname-input");
-    atTheOldToad.addPotion(addNameInput.value);
-  });
-btnRemove.addEventListener("click", atTheOldToad.removePotion);
-btnUpdate.addEventListener("click", atTheOldToad.updatePotionName);
+    const addNameIn = document.getElementById("addname-input");
+    const addPriceIn = document.getElementById("addprice-input");
+    if (addNameIn.value === "" || addPriceIn.value === "") {
+        return alert("Błąd! Uzupełnij wszytskie pola!");
+    }
+    atTheOldToad.addPotion(addNameIn.value, addPriceIn.value);
 
-// control.addEventListener("click", selectButton);
-// function selectButton(event) {
-//     if (event.target.nodeName !== "BUTTON") {
-//         return;
-//     }
-//     const selectedBtn = event.target.id;
-//     console.log(selectedBtn)
-//      if (selectedBtn === "getpotions"){
-//         atTheOldToad.getPotions()
-//         return;
-//      }
-//      if (selectedBtn === "addpotions"){
-//         atTheOldToad.addPotion({ name: "Invisibility", price: 620 })
-//         return;
-//      }
-//      if (selectedBtn === "removepotions"){
-//         atTheOldToad.removePotion("Dragon breath")
-//         return;
-//      }
+    addNameIn.value = "";
+    addPriceIn.value = "";
+});
 
-// }
+btnRemove.addEventListener("click", () => {
+    const addRemoveIn = document.getElementById("removename-input");
+    if (addRemoveIn.value === "") {
+        return alert("Błąd! Uzupełnij pole!");
+    }
+    atTheOldToad.removePotion(addRemoveIn.value);
+    addRemoveIn.value = "";
+});
+
+btnUpdate.addEventListener("click", () => {
+    const oldNameIn = document.getElementById("oldname-input");
+    const newNameIn = document.getElementById("newname-input");
+    if (oldNameIn.value === "" || newNameIn.value === "") {
+        return alert("Błąd! Uzupełnij wszytskie pola!");
+    }
+    atTheOldToad.updatePotionName(oldNameIn.value, newNameIn.value);
+    oldNameIn.value = "";
+    newNameIn.value.value = "";
+});
