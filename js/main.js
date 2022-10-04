@@ -1,12 +1,13 @@
 // tablica z obiektami wszytskich mikstur (nazwa,cena)
-const potions = [
+let potions = [
     { name: "Speed potion", price: 460 },
     { name: "Dragon breath", price: 780 },
     { name: "Stone skin", price: 520 },
 ];
-
+potions = JSON.parse(localStorage.getItem('list-potions'));
 
 const atTheOldToad = {
+    
     getPotions() {
         //Pokazuje wszytskie mikstury
         const listShop = document.querySelector(".shop")
@@ -20,12 +21,7 @@ const atTheOldToad = {
             
         });
         listShop.append(...createItem);
-        // const savedListPotions = localStorage.setItem('list-potions', JSON.stringify(potions))
-        // const parsedListPotions = JSON.parse(localStorage.getItem('list-potions'));
-        // console.log(parsedListPotions)
-        // listShop.insertAdjacentHTML("beforeend", parsedListPotions);
-        
-        
+        window.localStorage.setItem('list-potions', JSON.stringify(potions))   
     },
 
     addPotion(addNameInData, addPriceInData) {
@@ -39,7 +35,7 @@ const atTheOldToad = {
             }
         }
         potions.push({ name: addNameInData, price: addPriceInData });
-
+        this.getPotions();
         return alert(
             `Eliksir "${addNameInData}" z ceną: ${addPriceInData} został dodany do Twojego inwentarza!`
         );
@@ -49,17 +45,12 @@ const atTheOldToad = {
         const potionIndex = potions.findIndex(
             (object) => object.name === potionName
         );
-        // for (const item of potions) {
-        //     if (item.name !== potionName) {
-        //         return alert(
-        //             `Błąd! Eliksir ${potionName} nie ma w Twoim inwentarzu!`
-        //         );
-        //     }
-        // }
+       
         if (potionIndex === -1) {
             return alert(`Eliksiru "${potionName}" nie ma w Twoim inwentarzu!`);
         } else {
             potions.splice(potionIndex, 1);
+            this.getPotions();
             return alert(
                 `Eliksir "${potionName}" został usunięty z Twojego inwentarza!`
             );
@@ -75,13 +66,10 @@ const atTheOldToad = {
             return alert(`Eliksiru "${oldName}" nie ma w Twoim inwentarzu!`);
         }
         potions[potionIndex].name = newName;
+        this.getPotions();
         return alert(`Eliksir "${oldName}" zmienił nazwę na "${newName}"`);
     },
 };
-// atTheOldToad.addPotion({ name: "Invisibility", price: 620 })
-// atTheOldToad.updatePotionName("Stone skin", "Invulnerability potion")
-// atTheOldToad.removePotion("Dragon breath")
-// atTheOldToad.getPotions()
 
 const control = document.querySelector(".controls");
 
@@ -121,5 +109,5 @@ btnUpdate.addEventListener("click", () => {
     }
     atTheOldToad.updatePotionName(oldNameIn.value, newNameIn.value);
     oldNameIn.value = "";
-    newNameIn.value.value = "";
+    newNameIn.value = "";
 });
