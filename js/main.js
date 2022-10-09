@@ -14,13 +14,23 @@ const atTheOldToad = {
         listShop.innerHTML = "";
         const createItem = potions.map((potion) => {
             const listItem = document.createElement("li");
-            listItem.classList.add("item");
-            listItem.innerHTML = `Nazwa: "${potion.name}" Cena: ${potion.price}`;
-
+            const randomPic = Math.floor(Math.random() * 2 + 1);
+            listItem.classList.add("shop__item");
+            listItem.innerHTML = `<div class="card text-bg-light mb-3 animate__animated animate__backInRight" style="width: 18rem;">
+        <img src="images/potion${randomPic}.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Nazwa: ${potion.name}</h5>
+          <p class="card-text">Cena: ${potion.price}</p>
+           <a href="#" class="btn btn-primary">Kup</a></br>
+        </div>
+      </div>`;
             return listItem;
         });
+
         listShop.append(...createItem);
         window.localStorage.setItem("list-potions", JSON.stringify(potions));
+
+        // Notiflix.Notify.success("Pomyślnie odświeżono listę eliksirów");
     },
 
     addPotion(addNameInData, addPriceInData) {
@@ -83,11 +93,9 @@ const btnAdd = document.getElementById("addpotions");
 const btnRemove = document.getElementById("removepotions");
 const btnUpdate = document.getElementById("updatepotions");
 
-btnGet.addEventListener("click", () => {
-    
-    Notiflix.Notify.success("Pomyślnie odświeżono listę eliksirów");
-    atTheOldToad.getPotions();
-});
+// btnGet.addEventListener("click", () => {
+//     atTheOldToad.getPotions();
+// });
 
 btnAdd.addEventListener("click", () => {
     const addNameIn = document.getElementById("addname-input");
@@ -123,3 +131,4 @@ btnUpdate.addEventListener("click", () => {
     oldNameIn.value = "";
     newNameIn.value = "";
 });
+atTheOldToad.getPotions();
