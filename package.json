@@ -1,0 +1,22 @@
+{
+  "name": "shop-with-elixir",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gash94/shop-with-elixir.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gash94/shop-with-elixir/issues"
+  },
+  "homepage": "https://github.com/gash94/shop-with-elixir#readme",
+  "dependencies": {
+    "notiflix": "^3.2.5"
+  }
+}

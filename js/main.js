@@ -1,7 +1,6 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 // tablica z obiektami wszytskich mikstur (nazwa,cena)
-
-
-
 let potions = JSON.parse(window.localStorage.getItem('list-potions'));
 if (potions === null) {
     potions = [
@@ -33,7 +32,7 @@ const atTheOldToad = {
 
         for (const item of potions) {
             if (item.name === addNameInData) {
-                return alert(
+                return Notify.warning(
                     `Błąd! Eliksir ${addNameInData} jest już w Twoim inwentarzu!`
                 );
             }
