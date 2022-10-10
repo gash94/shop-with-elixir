@@ -7,44 +7,47 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.min.css" />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&display=swap" rel="stylesheet">
     <title>Sklep "u Starej Ropuchy"</title>
 </head>
 
 <body>
-    <h1 class="display-1 animate__animated animate__rubberBand">Sklep u Starej Ropuchy</h1>
-    
-    <div class="controls container-fluid shadow p-3 mb-5 bg-body rounded animate__animated animate__backInDown">
+
+    <h1 class="display-1 animate__animated animate__rubberBand animate__slow">Sklep u Starej Ropuchy</h1>
+
+    <div
+        class="controls sticky-top container-fluid shadow p-2 mb-5 bg-body rounded animate__animated animate__backInDown">
 
         <div class="controls__item input-group">
-            <input class="form-control" type="text" id="addname-input" placeholder="Wprowadź nazwę eliksiru" />
-            <input class="form-control" type="number" id="addprice-input" placeholder="Wprowadź cenę eliksiru" />
+
+            <input class="form-control" type="text" id="addname-input" placeholder="Wprowadź nazwę" />
+            <input class="form-control" type="number" id="addprice-input" placeholder="Wprowadź cenę" />
             <button class="btn btn-primary" type="button" id="addpotions">Dodaj eliksir</button>
         </div>
         <div class="controls__item input-group">
-            <input class="form-control" type="text" id="oldname-input" placeholder="Stara nazwa eliksiru" />
-            <input class="form-control" type="text" id="newname-input" placeholder="Nowa nazwa eliksiru" />
+            <input class="form-control" type="text" id="oldname-input" placeholder="Stara nazwa" />
+            <input class="form-control" type="text" id="newname-input" placeholder="Nowa nazwa" />
             <button class="btn btn-primary" type="button" id="updatepotions">Zmień nazwę</button>
         </div>
-        <div class="controls__item input-group">
-            <input class="form-control" type="text" id="removename-input" placeholder="Wprowadź nazwę eliksiru" />
-            <button class="btn btn-primary" type="button" id="removepotions">Usuń eliksir</button>
+        <div class="controls__item input-group" style="height: 38px;">
+            <!-- <input class="form-control" type="text" id="removename-input" placeholder="Wprowadź nazwę eliksiru" />  -->
+            <div class="combo js-combobox">
+                <input aria-activedescendant="" aria-autocomplete="none" aria-controls="listbox2" aria-expanded="false"
+                    aria-haspopup="listbox" id="removename-input" class="form-control" role="combobox" type="text" />
+                <div class="combo-menu" role="listbox" id="listbox2"></div>
+            </div>
+            <button class="btn btn-primary" style="height: 38px;" type="button" id="removepotions">Usuń eliksir</button>
         </div>
-
-
-        <!-- <button id="getpotions">Wyświetl eliksiry</button> -->
     </div>
     <div class="container-fluid">
         <ul class="shop"></ul>
     </div>
 
 
+    <script src="js/function.js"></script>
     <script src="js/main.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/notiflix@3.2.5/dist/notiflix-aio-3.2.5.min.js"></script>
 
@@ -54,6 +57,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
         integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/body-scroll-lock/3.1.5/bodyScrollLock.min.js"
+        integrity="sha512-HowizSDbQl7UPEAsPnvJHlQsnBmU2YMrv7KkTBulTLEGz9chfBoWYyZJL+MUO6p/yBuuMO/8jI7O29YRZ2uBlA=="
         crossorigin="anonymous"></script>
 </body>
 
