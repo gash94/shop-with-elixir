@@ -5,7 +5,7 @@ if (potions === null) {
     potions = [
         { name: "Speed potion", price: 460, random: 1 },
         { name: "Dragon breath", price: 780, random: 2 },
-        { name: "Stone skin", price: 520, random: 1 },
+        { name: "Stone skin", price: 520, random: 3 },
     ];
 }
 const atTheOldToad = {
@@ -46,7 +46,7 @@ const atTheOldToad = {
                 );
             }
         }
-        const randomPic = Math.floor(Math.random() * 2 + 1);
+        const randomPic = Math.floor(Math.random() * 8 + 1);
 
         potions.push({ name: addNameInData, price: addPriceInData, random: randomPic });
         this.getPotions();
