@@ -9,6 +9,7 @@ if (potions === null) {
     ];
 }
 const atTheOldToad = {
+
     getPotions() {
         //Pokazuje wszystkie mikstury
         const listShop = document.querySelector(".shop");
@@ -46,7 +47,7 @@ const atTheOldToad = {
                 );
             }
         }
-        const randomPic = Math.floor(Math.random() * 8 + 1);
+        const randomPic = Math.floor(Math.random() * 10 + 1);
 
         potions.push({ name: addNameInData, price: addPriceInData, random: randomPic });
         this.getPotions();
