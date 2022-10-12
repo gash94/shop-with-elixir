@@ -1,45 +1,60 @@
 // tablica z obiektami wszytskich mikstur (nazwa,cena)
 let potions = JSON.parse(window.localStorage.getItem("list-potions"));
-console.log(potions)
+console.log(potions);
 if (potions === null) {
     potions = [
-        { name: "Speed potion", price: 460, random: 1 },
-        { name: "Dragon breath", price: 780, random: 2 },
-        { name: "Stone skin", price: 520, random: 3 },
+        { name: "Speed potion", price: 460, random: 7 },
+        { name: "Dragon breath", price: 780, random: 6 },
+        { name: "Stone skin", price: 520, random: 8 },
     ];
 }
+const listShop = document.querySelector(".shop");
+
 const atTheOldToad = {
+    createPotion(name, price, pic, animate) {
+        const listItem = document.createElement("li");
+        listItem.classList.add("animate__animated");
+        listItem.classList.add(`${animate}`);
+        listItem.classList.add("shop__item");
+        listItem.innerHTML = `<div class="card text-bg-light mb-3" style="width: 18rem;">
+            <img src="images/potion${pic}.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Nazwa: ${name}</h5>
+              <p class="card-text">Cena: ${price}</p>
+               <a href="#" class="btn btn-primary">Kup</a></br>
+            </div>
+          </div>`;
+        return listItem;
+    },
+    removePot(name, animate) {
+        const listItem = document.querySelectorAll(
+            "li[class='animate__animated']"
+        );
+        listItem.classList.add(`${animate}`);
+        listItem.remove();
+    },
 
     getPotions() {
         //Pokazuje wszystkie mikstury
-        const listShop = document.querySelector(".shop");
-        listShop.innerHTML = "";
-    //   const filterArr = potions.filter(el => el === 1);
-   
-    //   console.log(filterArr)
-   
-      
-        const createItem = potions.map((potion) => {
-            const listItem = document.createElement("li");
 
-            listItem.classList.add("shop__item");
-            listItem.innerHTML = `<div class="card text-bg-light mb-3 animate__animated animate__backInRight" style="width: 18rem;">
-        <img src="images/potion${potion.random}.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Nazwa: ${potion.name}</h5>
-          <p class="card-text">Cena: ${potion.price}</p>
-           <a href="#" class="btn btn-primary">Kup</a></br>
-        </div>
-      </div>`;
-            return listItem;
-        });
+        listShop.innerHTML = "";
+
+        const createItem = potions.map((potion) =>
+            this.createPotion(
+                potion.name,
+                potion.price,
+                potion.random,
+                "animate__bounceInUp"
+            )
+        );
+
         listShop.append(...createItem);
+
         window.localStorage.setItem("list-potions", JSON.stringify(potions));
     },
 
     addPotion(addNameInData, addPriceInData) {
         //Dodaje miksture do tablicy jesli nie ma, jesli jest zwraca komunikat
-
         for (const item of potions) {
             if (item.name === addNameInData) {
                 return Notiflix.Notify.failure(
@@ -47,14 +62,29 @@ const atTheOldToad = {
                 );
             }
         }
+        //losowy obrazek
         const randomPic = Math.floor(Math.random() * 10 + 1);
+        //dodanie do tablicy
+        potions.push({
+            name: addNameInData,
+            price: addPriceInData,
+            random: randomPic,
+        });
 
-        potions.push({ name: addNameInData, price: addPriceInData, random: randomPic });
-        this.getPotions();
+        listShop.prepend(
+            this.createPotion(
+                addNameInData,
+                addPriceInData,
+                randomPic,
+                "animate__bounceIn"
+            )
+        );
+        window.localStorage.setItem("list-potions", JSON.stringify(potions));
         return Notiflix.Notify.success(
             `Eliksir "${addNameInData}" z ceną: ${addPriceInData} został dodany do Twojego inwentarza!`
         );
     },
+
     removePotion(potionName) {
         //usuwa miksture jesli jest w tablicy, jesli nie zwraca komunikat
         const potionIndex = potions.findIndex(
@@ -67,7 +97,9 @@ const atTheOldToad = {
             );
         } else {
             potions.splice(potionIndex, 1);
+            
             this.getPotions();
+            // listShop.append(this.removePot("animate__bounceOutDown"));
             return Notiflix.Notify.success(
                 `Eliksir "${potionName}" został usunięty z Twojego inwentarza!`
             );
@@ -99,7 +131,6 @@ const atTheOldToad = {
 
 const control = document.querySelector(".controls");
 
-const btnGet = document.getElementById("getpotions");
 const btnAdd = document.getElementById("addpotions");
 const btnRemove = document.getElementById("removepotions");
 const btnUpdate = document.getElementById("updatepotions");
@@ -107,14 +138,12 @@ const btnUpdate = document.getElementById("updatepotions");
 btnAdd.addEventListener("click", () => {
     const addNameIn = document.getElementById("addname-input");
     const addPriceIn = document.getElementById("addprice-input");
-
     console.log(addPriceIn.value);
     if (addNameIn.value === "" || addPriceIn.value === "") {
         return Notiflix.Notify.failure("Błąd! Uzupełnij wszystkie pola!");
     }
 
     atTheOldToad.addPotion(addNameIn.value, Number(addPriceIn.value));
-
     addNameIn.value = "";
     addPriceIn.value = "";
 });
@@ -140,8 +169,6 @@ btnUpdate.addEventListener("click", () => {
 });
 
 atTheOldToad.getPotions();
-
-
 
 // Code By Webdevtrick ( https://webdevtrick.com )
 const Keys = {

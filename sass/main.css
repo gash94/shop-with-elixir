@@ -1,22 +1,17 @@
 /* Code By Webdevtrick ( https://webdevtrick.com ) */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #f5f5f5;
-  font-family: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 120%;
-  line-height: 1.4;
-  margin: 0 auto;
-  padding: 2em;
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  text-decoration: none;
+  outline: 0;
 }
 
 .combo {
-  display: block;
-  margin-bottom: 1.5em;
-  max-width: 400px;
   position: relative;
+  flex: 1 1 auto;
+  width: 1%;
 }
 
 .combo::after {
@@ -33,41 +28,12 @@ body {
   width: 12px;
 }
 
-.combo-input {
-  background-color: #f5f5f5;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-  display: block;
-  font-size: 1em;
-  min-height: calc(1.4em + 26px);
-  padding: 12px 16px 14px;
-  text-align: left;
-  width: 100%;
-}
-
-.open .combo-input {
-  border-radius: 4px 4px 0 0;
-}
-
-.combo-input:focus {
-  border-color: #e60023;
-  box-shadow: 0 0 4px 2px #e60023;
-  outline: 5px solid transparent;
-}
-
-.combo-label {
-  display: block;
-  font-size: 20px;
-  font-weight: 100;
-  margin-bottom: 0.25em;
-}
-
 .combo-menu {
   background-color: #f5f5f5;
   border: 1px solid rgba(0, 0, 0, 0.42);
   border-radius: 0 0 4px 4px;
   display: none;
-  max-height: 300px;
+  max-height: 200px;
   overflow-y: scroll;
   left: 0;
   position: absolute;
@@ -81,7 +47,7 @@ body {
 }
 
 .combo-option {
-  padding: 10px 12px 12px;
+  padding: 5px 5px 5px;
 }
 
 .combo-option.option-current,
@@ -106,56 +72,6 @@ body {
   width: 8px;
 }
 
-.selected-options {
-  list-style-type: none;
-  margin: 0;
-  max-width: 400px;
-  padding: 0;
-}
-
-.selected-options li {
-  display: inline-block;
-  margin-bottom: 5px;
-}
-
-.remove-option {
-  background-color: #ff3d3d;
-  border: 1px solid #ff3d3d;
-  border-radius: 3px;
-  color: #fff;
-  font-size: 0.75em;
-  font-weight: bold;
-  margin-bottom: 6px;
-  margin-right: 6px;
-  padding: 0.25em 1.75em 0.25em 0.25em;
-  position: relative;
-}
-
-.remove-option:focus {
-  border-color: #baa1dd;
-  box-shadow: 0 0 3px 1px #ff3d3d;
-  outline: 3px solid transparent;
-}
-
-.remove-option::before,
-.remove-option::after {
-  border-right: 2px solid #fff;
-  content: "";
-  height: 1em;
-  right: 0.75em;
-  position: absolute;
-  top: 50%;
-  width: 0;
-}
-
-.remove-option::before {
-  transform: translate(0, -50%) rotate(45deg);
-}
-
-.remove-option::after {
-  transform: translate(0, -50%) rotate(-45deg);
-}
-
 body {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-info-rgb), var(--bs-bg-opacity)) !important;
@@ -167,11 +83,17 @@ h1 {
 }
 
 .controls {
-  display: flex;
+  min-width: 300px;
+  max-width: 500px;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .controls__item {
-  margin: 5px;
+  margin-top: 5px;
+  justify-content: flex-end;
 }
 
 .shop {
@@ -180,8 +102,13 @@ h1 {
   flex-wrap: wrap;
   align-items: flex-start;
   list-style-type: none;
+  padding: 0;
 }
 .shop__item {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.btn-primary {
+  width: 120px;
 }/*# sourceMappingURL=main.css.map */
