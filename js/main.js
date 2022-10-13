@@ -1,5 +1,30 @@
+const save = (key, value) => {
+    try {
+      const serializedState = JSON.stringify(value);
+      localStorage.setItem(key, serializedState);
+    } catch (error) {
+      console.error("Set state error: ", error.message);
+    }
+  };
+  
+  const load = key => {
+    try {
+      const serializedState = localStorage.getItem(key);
+      return serializedState === null ? undefined : JSON.parse(serializedState);
+    } catch (error) {
+      console.error("Get state error: ", error.message);
+    }
+  };
+  
+  export default {
+    save,
+    load,
+  };
+
+
 // tablica z obiektami wszytskich mikstur (nazwa,cena)
-let potions = JSON.parse(window.localStorage.getItem("list-potions"));
+
+let potions = load("list-potions");
 console.log(potions);
 if (potions === null) {
     potions = [
@@ -24,6 +49,7 @@ const atTheOldToad = {
                <a href="#" class="btn btn-primary">Kup</a></br>
             </div>
           </div>`;
+          
         return listItem;
     },
     removePot(name, animate) {
@@ -48,9 +74,10 @@ const atTheOldToad = {
             )
         );
 
-        listShop.append(...createItem);
+        listShop.prepend(...createItem);
 
-        window.localStorage.setItem("list-potions", JSON.stringify(potions));
+        save("list-potions" , potions)
+        // window.localStorage.setItem("list-potions", JSON.stringify(potions));
     },
 
     addPotion(addNameInData, addPriceInData) {
@@ -79,7 +106,7 @@ const atTheOldToad = {
                 "animate__bounceIn"
             )
         );
-        window.localStorage.setItem("list-potions", JSON.stringify(potions));
+        save("list-potions" , potions)
         return Notiflix.Notify.success(
             `Eliksir "${addNameInData}" z ceną: ${addPriceInData} został dodany do Twojego inwentarza!`
         );
