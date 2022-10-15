@@ -24,7 +24,7 @@ const save = (key, value) => {
 
 // tablica z obiektami wszytskich mikstur (nazwa,cena)
 
-let potions = load("list-potions");
+let potions = JSON.parse(localStorage.getItem("list-potions"));
 console.log(potions);
 if (potions === null || potions === undefined) {
     potions = [
