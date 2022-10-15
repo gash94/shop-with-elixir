@@ -33,6 +33,7 @@ if (potions === null || potions === undefined) {
         { name: "Stone skin", price: 520, random: 8 },
     ];
 }
+
 const listShop = document.querySelector(".shop");
 
 const atTheOldToad = {
@@ -52,13 +53,13 @@ const atTheOldToad = {
           
         return listItem;
     },
-    removePot(name, animate) {
-        const listItem = document.querySelectorAll(
-            "li[class='animate__animated']"
-        );
-        listItem.classList.add(`${animate}`);
-        listItem.remove();
-    },
+    // removePot(name, animate) {
+    //     const listItem = document.querySelectorAll(
+    //         "li[class='animate__animated']"
+    //     );
+    //     listItem.classList.add(`${animate}`);
+    //     listItem.remove();
+    // },
 
     getPotions() {
         //Pokazuje wszystkie mikstury
