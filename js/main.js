@@ -26,7 +26,7 @@ const save = (key, value) => {
 
 let potions = load("list-potions");
 console.log(potions);
-if (potions === null) {
+if (potions === null || potions === undefined) {
     potions = [
         { name: "Speed potion", price: 460, random: 7 },
         { name: "Dragon breath", price: 780, random: 6 },

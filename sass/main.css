@@ -85,7 +85,6 @@ h1 {
 .controls {
   min-width: 300px;
   max-width: 500px;
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   padding-top: 8px;
