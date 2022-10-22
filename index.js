@@ -53,7 +53,6 @@ const listShop = document.querySelector(".shop");
 
 const atTheOldToad = {
     refresh() {
-        
         const comboinit = document.getElementById("listbox2");
         comboinit.style.display = "none";
         comboinit.offsetHeight;

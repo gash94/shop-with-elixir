@@ -1,5 +1,5 @@
 // Code By Webdevtrick ( https://webdevtrick.com )
-import { options } from "/index.js";
+import { options } from "../index.js";
 
 const Keys = {
     Backspace: "Backspace",
