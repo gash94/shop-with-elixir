@@ -1,29 +1,5 @@
 import { Combobox } from "./js/combobox.js";
-
-const save = (key, value) => {
-    try {
-        const serializedState = JSON.stringify(value);
-        localStorage.setItem(key, serializedState);
-    } catch (error) {
-        console.error("Set state error: ", error.message);
-    }
-};
-
-const load = (key) => {
-    try {
-        const serializedState = localStorage.getItem(key);
-        return serializedState === null
-            ? undefined
-            : JSON.parse(serializedState);
-    } catch (error) {
-        console.error("Get state error: ", error.message);
-    }
-};
-
-export default {
-    save,
-    load,
-};
+import { save, load } from "./js/storage.js";
 
 // tablica z obiektami wszytskich mikstur (nazwa,cena)
 let potions = load("list-potions");
@@ -38,7 +14,6 @@ if (potions === null || potions === undefined) {
 }
 
 
-
 // init combo
 const comboEl = document.querySelector(".js-combobox");
 let options = potions.map((obj) => obj.name);
@@ -46,8 +21,6 @@ const comboComponent = new Combobox(comboEl, options);
 comboComponent.init();
 
 export {options}
-
-
 
 const listShop = document.querySelector(".shop");
 
@@ -90,7 +63,7 @@ const atTheOldToad = {
     getPotions() {
         //Wyświetla wszystkie mikstury
         listShop.innerHTML = "";
-        const createItem = potions.map((potion) =>
+        const createItem = potions.sort((a, b) => b.created - a.created).map((potion) =>
             this.createPotion(
                 potion.name,
                 potion.price,
@@ -120,6 +93,7 @@ const atTheOldToad = {
             name: addNameInData,
             price: addPriceInData,
             random: randomPic,
+            created: new Date().getTime(),
         });
 
         listShop.prepend(
@@ -208,7 +182,6 @@ const btnUpdate = document.getElementById("updatepotions");
 btnAdd.addEventListener("click", () => {
     const addNameIn = document.getElementById("addname-input");
     const addPriceIn = document.getElementById("addprice-input");
-    console.log(addPriceIn.value);
     if (addNameIn.value === "" || addPriceIn.value === "") {
         return Notiflix.Notify.failure("Błąd! Uzupełnij wszystkie pola!");
     }
