@@ -1,4 +1,4 @@
-[LIVE DEMO](https://gash94.github.io/shop-with-elixir/)
+#[LIVE DEMO](https://gash94.github.io/shop-with-elixir/)
 
 # #EN Shop with elixir "at the Old Toad"
 A simple "shop" design that allows you to:
